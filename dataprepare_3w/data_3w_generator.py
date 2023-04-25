@@ -6,8 +6,8 @@ import os
 
 import torch
 
-normal_path = "/home/shida/3W/dataset/0"
-inst_path = "/home/shida/3W/dataset/4"  # instability data
+normal_path = "../3W/dataset/0"
+inst_path = "../3W/dataset/4"  # instability data
 normal_name = os.listdir(normal_path)
 inst_name = os.listdir(inst_path)
 
