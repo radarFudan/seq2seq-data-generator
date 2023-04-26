@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # First time to run this code, the data will be generated and saved in the data folder
 
     T = 90
-    data = np.load("tcw_1980_2022.npy")
+    data = np.load("dataprepare_3w/tcw_1980_2022.npy")
     train, test = dataset_generator(
         data, length=100, train_test_ratio=0.7, sliding_window=True
     )
