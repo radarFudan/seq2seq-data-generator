@@ -14,3 +14,13 @@ seq2seq-data-generator is at the same level w.r.t. 3W.
     - data: Stored process data, in the format of x/y _ strain/test
 
 -3W
+
+#### Potential improvement
+
+Try other sequence model, CNN / Transformer, maybe we can use linear combination of these models to learn a hybrid model, and then check the memory of the hybrid model.
+
+
+
+1. Synthetic dataset
+2. Hyperparameter tuning
+3. Mori-Danzig Formalism ...

@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # exit()
 
     activation = "tanh"  # Tanh RNN
-    hid_dim = 128
+    hid_dim = 512
     num_layers = 1
     input_dim = 3
     output_dim = 1

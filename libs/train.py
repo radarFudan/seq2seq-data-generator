@@ -87,7 +87,7 @@ def train_model(
     if devices == 1:
         trainer = Trainer(
             accelerator="gpu",
-            devices=[3],
+            devices=[0],
             max_epochs=epochs,
             precision=64,
             logger=TensorBoardLogger("runs", name=name),
