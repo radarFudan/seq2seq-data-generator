@@ -69,10 +69,12 @@ def dataset_generator(
 
 
 if __name__ == "__main__":
-    data = np.load("tcw_1980_2022.npy")
+    data = np.load("./dataprepare_tcw/tcw_1980_2022.npy")
     # generate dataset
     train, test = dataset_generator(
         data, length=100, train_test_ratio=0.7, sliding_window=True
     )
-    # print(train.shape, test.shape)  # (10638, 100, 1) (4503, 100, 1)
-    # print(train.dtype, test.dtype)
+    print(train.shape, test.shape)  # (10638, 100, 1) (4503, 100, 1)
+    print(train.dtype, test.dtype)
+    print(np.linalg.norm(train), np.linalg.norm(test))
+    print(np.max(train), np.max(test))
