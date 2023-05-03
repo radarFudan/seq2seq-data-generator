@@ -12,34 +12,39 @@ if __name__ == "__main__":
 
     T = 256
 
-    memory_type_list = ["Exp", "ExpPeak", "Shift", "TwoPart"]
-    memory_type_list_prefix = ["exp", "epk_lambda", "shift", "TP_"]
+    # memory_type_list = ["Exp", "ExpPeak", "Shift", "TwoPart"]
+    memory_type_list = ["Exp", "shift",]
 
 
-
-    for memory_type, memory_type_list in zip(memory_type_list, memory_type_list_prefix):
-        data_dir = Path(f"./Data/{memory_type}")
+    for memory_type in memory_type_list:
+        data_dir = Path(f"./data/{memory_type}")
         if os.path.exists(data_dir):
-            train = torch.load(f"{data_dir}/in_{}.pickle")
-            train_output = torch.load(f"{data_dir}/out_.pickle")
+            index = 0
+
+            with open(f"{data_dir}/in_{index}.pickle", 'rb') as f:
+                train = pickle.load(f)
+            with open(f"{data_dir}/out_{index}.pickle", 'rb') as f:
+                train_output = pickle.load(f)
+
+            train_output = np.load(f"{data_dir}/out_{index}.pickle", allow_pickle=True)
 
             # Normalization
-            train /= torch.max(train)
-            train_output /= torch.max(train_output)
+            train /= np.max(train)
+            train_output /= np.max(train_output)
+
+            # with open('filename.pkl', 'rb') as f:
+            # # Load the pickled data from the file
+            #     data = pickle.load(f)
         else:
             raise NotImplementedError
 
         # TODO
-        # conduct train test split using keras
-
-        print(train.shape, train_output.shape, test.shape, test_output.shape)
-        print(train.dtype, train_output.dtype, test.dtype, test_output.dtype)
-        exit()
+        # train test split
 
         activation = "tanh"  # Tanh RNN
         hid_dim = 512
         num_layers = 1
-        input_dim = 3
+        input_dim = 1
         output_dim = 1
         config = {}
         config["loss"] = torch.nn.MSELoss()
@@ -61,8 +66,8 @@ if __name__ == "__main__":
             ),
             train,
             train_output,
-            test,
-            test_output,
+            train,
+            train_output,
             call_backs=[
                 EarlyStopping(
                     monitor="valid_loss",

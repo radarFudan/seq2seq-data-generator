@@ -453,7 +453,7 @@ def train_toy(
     if devices == 1:
         trainer = Trainer(
             accelerator="gpu",
-            devices=[2],
+            devices=[0],
             max_epochs=epochs,
             precision=64,
             logger=TensorBoardLogger("runs", name=name),
