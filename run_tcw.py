@@ -37,7 +37,13 @@ if __name__ == "__main__":
     train_output = train[:, -T:, :]
     test_in = test[:, :T, :]
     test_output = test[:, -T:, :]
-    print(train_in.shape, train_output.shape, test_in.shape, test_output.shape)
+
+    train_in /= np.max(train_in)
+    train_output /= np.max(train_output)
+    test_in /= np.max(test_in)
+    test_output /= np.max(test_output)
+
+    print("train_in.shape", train_in.shape, "train_output.shape", train_output.shape, "\ntest_in.shape", test_in.shape, "test_output.shape", test_output.shape)
 
     activation = "tanh"  # Tanh RNN
     hid_dim = 512

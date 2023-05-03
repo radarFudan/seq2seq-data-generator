@@ -7,7 +7,6 @@ from dataprepare_3w.data_3w_generator import w3_generator
 
 # from libs.train_with_tune import *
 
-
 if __name__ == "__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1, 2, 3"
 
@@ -24,6 +23,11 @@ if __name__ == "__main__":
         train_output = torch.load(f"{data_dir}/y_train.pt")
         test = torch.load(f"{data_dir}/x_test.pt")
         test_output = torch.load(f"{data_dir}/y_test.pt")
+
+        train /= torch.max(train)
+        train_output /= torch.max(train_output)
+        test /= torch.max(test)
+        test_output /= torch.max(test_output)
     else:
         data_dir.mkdir(exist_ok=True, parents=True)
         train, train_output, test, test_output = w3_generator(900, 0.7, overlap_ratio=0)
