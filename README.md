@@ -21,8 +21,13 @@ A memory calculator function to calculate the memory given a kernel is included.
 2. TCW - total column water 
 3. 3W (https://github.com/petrobras/3W.git)
 
+    Classification task, to evaluate the accuracy
+
     Put the seq2seq-data-generator repo in the same folder as 3W.
-4. \* CFD
+4. CFD
+
+    Regression task, 
+
 5. \* Oil temperature
 
 ### Future improvement
