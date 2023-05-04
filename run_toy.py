@@ -13,7 +13,7 @@ if __name__ == "__main__":
     T = 256
 
     # memory_type_list = ["Exp", "ExpPeak", "Shift", "TwoPart"]
-    memory_type_list = ["Exp", "shift",]
+    memory_type_list = ["Exp", "Shift",]
 
 
     for memory_type in memory_type_list:
@@ -31,6 +31,9 @@ if __name__ == "__main__":
             # Normalization
             train /= np.max(train)
             train_output /= np.max(train_output)
+
+            print(train.shape, train_output.shape)
+            # exit()
 
             # with open('filename.pkl', 'rb') as f:
             # # Load the pickled data from the file
@@ -61,7 +64,7 @@ if __name__ == "__main__":
                 num_layers=num_layers,
                 input_dim=input_dim,
                 output_dim=output_dim,
-                return_sequence=False,
+                return_sequence=True,
                 dtype=32,
             ),
             train,

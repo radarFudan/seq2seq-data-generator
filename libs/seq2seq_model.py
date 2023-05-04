@@ -220,3 +220,32 @@ class LinearTCNModel(Seq2SeqModel):
 #         y = self.output(y)
 
 #         return y
+
+
+
+class LSTMModel(Seq2SeqModel):
+    def __init__(self, config, num_layers, input_dim, hid_dim, output_dim, return_sequence=False, bias=False):
+        super().__init__(config=config)
+
+        self.lstm = nn.LSTM(
+            input_size=input_dim,
+            hidden_size=hid_dim,
+            num_layers=num_layers,
+            batch_first=True,
+        )
+        self.readout = nn.Linear(
+            hid_dim,
+            output_dim,
+            bias=bias,
+            dtype=torch.float64,
+        )
+        self.return_sequence = return_sequence
+
+    def forward(self, x):
+        x, (h_n, c_n) = self.lstm(x)
+        y = self.readout(x)
+
+        if self.return_sequence:
+            return y
+        else:
+            return y[:, -1, :]

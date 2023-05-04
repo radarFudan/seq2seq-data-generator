@@ -9,7 +9,7 @@ from pytorch_lightning.strategies import DDPStrategy
 from pytorch_lightning.loggers import TensorBoardLogger
 import os
 import pickle
-from libs.seq2seq_model import RNNModel, LinearRNNModel, ComplexLinearRNNModel
+from libs.seq2seq_model import RNNModel, LinearRNNModel, ComplexLinearRNNModel, LSTMModel
 from libs.lfgenerator import Exponential
 from math import floor
 from datetime import datetime
@@ -371,7 +371,7 @@ def train_tcw(
     if devices == 1:
         trainer = Trainer(
             accelerator="gpu",
-            devices=[2],
+            devices=[1],
             max_epochs=epochs,
             precision=64,
             logger=TensorBoardLogger("runs", name=name),

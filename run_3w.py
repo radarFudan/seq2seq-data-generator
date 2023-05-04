@@ -24,10 +24,11 @@ if __name__ == "__main__":
         test = torch.load(f"{data_dir}/x_test.pt")
         test_output = torch.load(f"{data_dir}/y_test.pt")
 
-        train /= torch.max(train)
-        train_output /= torch.max(train_output)
-        test /= torch.max(test)
-        test_output /= torch.max(test_output)
+        print("train input shape, ", train.shape, train.dtype)
+        train /= torch.max(torch.Tensor(train))
+        train_output /= torch.max(torch.Tensor(train_output))
+        test /= torch.max(torch.Tensor(test))
+        test_output /= torch.max(torch.Tensor(test_output))
     else:
         data_dir.mkdir(exist_ok=True, parents=True)
         train, train_output, test, test_output = w3_generator(900, 0.7, overlap_ratio=0)
@@ -57,15 +58,23 @@ if __name__ == "__main__":
 
     train_3w(
         f"{activation}RNN_3w",
-        RNNModel(
+        LSTMModel(
             config=config,
             hid_dim=hid_dim,
             num_layers=num_layers,
             input_dim=input_dim,
             output_dim=output_dim,
             return_sequence=False,
-            dtype=32,
         ),
+        # RNNModel(
+        #     config=config,
+        #     hid_dim=hid_dim,
+        #     num_layers=num_layers,
+        #     input_dim=input_dim,
+        #     output_dim=output_dim,
+        #     return_sequence=False,
+        #     dtype=32,
+        # ),
         train,
         train_output,
         test,

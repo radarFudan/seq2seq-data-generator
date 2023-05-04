@@ -59,15 +59,23 @@ if __name__ == "__main__":
 
     train_tcw(
         f"{activation}RNN_tcw",
-        RNNModel(
+        LSTMModel(
             config=config,
             hid_dim=hid_dim,
             num_layers=num_layers,
             input_dim=input_dim,
             output_dim=output_dim,
             return_sequence=True,
-            dtype=32,
         ),
+        # RNNModel(
+        #     config=config,
+        #     hid_dim=hid_dim,
+        #     num_layers=num_layers,
+        #     input_dim=input_dim,
+        #     output_dim=output_dim,
+        #     return_sequence=True,
+        #     dtype=32,
+        # ),
         train_in,
         train_output,
         test_in,
